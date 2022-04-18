@@ -18,17 +18,17 @@ export class UserService {
   static async createUser(createUserDto: CreateUserDto) {
     const { firstName, lastName, email, password } = createUserDto;
 
-    const user = UserRepostirory.create({ firstName, lastName });
+    const user = UserRepostirory.create({ firstName, lastName }); // set user entity
 
-    const credentials = CredentialsRepository.create({ email, password });
+    const credentials = CredentialsRepository.create({ email, password }); // set credentials entity
 
-    const role = UsersRoleRepository.create();
+    const role = UsersRoleRepository.create(); // set role entity with default value ( UserRole.USER )
 
-    user.credentials = credentials;
+    user.credentials = credentials; // attach credentials to user
 
-    user.roles = [role];
+    user.roles = [role]; // attach role to user
 
-    await UserRepostirory.save(user);
+    await UserRepostirory.save(user); // save user into repo
 
     return { firstName, lastName };
   }
