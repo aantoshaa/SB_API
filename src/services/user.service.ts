@@ -1,4 +1,4 @@
-import { UserRole } from "../entities/role.entity";
+import jwt from "jsonwebtoken";
 import { CredentialsRepository } from "../repositories/credentials.repository";
 import { UsersRoleRepository } from "../repositories/user-role.repository";
 import { UserRepostirory } from "../repositories/user.repository";
@@ -31,5 +31,11 @@ export class UserService {
     await UserRepostirory.save(user); // save user into repo
 
     return { firstName, lastName };
+  }
+
+  static loginUser(id: number): { token: string } {
+    return {
+      token: jwt.sign({ sub: id }, "secret"),
+    };
   }
 }

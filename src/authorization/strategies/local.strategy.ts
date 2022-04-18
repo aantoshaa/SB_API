@@ -1,8 +1,12 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import { UserRepostirory } from "../../repositories/user.repository";
+import { localStrategyOptions } from "./options/local.options";
 
 export const localStrategy = new LocalStrategy(
+  localStrategyOptions,
   async (email, password, done) => {
+    console.log("Inside strategy");
+
     try {
       const user = await UserRepostirory.findOne({
         where: {

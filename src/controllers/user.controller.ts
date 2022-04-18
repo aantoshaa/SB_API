@@ -1,4 +1,4 @@
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/user.service";
 import { RegistrationRequest } from "../shared/interfaces/registration-request";
 
@@ -8,17 +8,31 @@ export class UserController {
     res: Response,
     next: NextFunction
   ) {
+    const { firstName, lastName, email, password } = req.body;
+
+    await UserService.createUser({
+      firstName,
+      lastName,
+      email,
+      password,
+    }).catch(next);
+
+    return { firstName, lastName };
+  }
+
+  static async login(
+    req: Request & { user: any }, // improve that
+    res: Response,
+    next: NextFunction
+  ) {
+    console.log("Insider Controller");
+
     try {
-      const { firstName, lastName, email, password } = req.body;
+      const { id } = req.user;
 
-      const user = await UserService.createUser({
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      const tokenDto = UserService.loginUser(id);
 
-      res.send(user);
+      res.send(tokenDto);
     } catch (err) {
       next(err);
     }

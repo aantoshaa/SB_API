@@ -9,10 +9,9 @@ const app: Application = express();
 
 //config
 app.use(express.json());
-app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-
+app.use(passport.initialize());
 //set routes
 app.use("/users", usersRouter);
 
@@ -26,15 +25,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 //start point
 const bootstrap = async () => {
-  try {
-    await AppDataSource.initialize().then(() =>
-      console.log("Connected to PostgreSQL successfully")
-    );
+  await AppDataSource.initialize().then(() =>
+    console.log("Connected to PostgreSQL successfully")
+  );
 
-    app.listen(3000, () => console.log("Server is active"));
-  } catch (err) {
-    console.log(err.message);
-  }
+  app.listen(3000, () => console.log("Server is active"));
 };
 
 bootstrap();
