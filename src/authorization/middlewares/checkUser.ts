@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { UserAlreadyExistException } from "../../error-handnling/exceptions";
 import { UserService } from "../../services/user.service";
 
 export const checkUser = async (
@@ -9,7 +10,7 @@ export const checkUser = async (
   const { email } = req.body;
 
   if (await UserService.isUserExists(email))
-    return next(new Error("Such user has already exists"));
+    return next(new UserAlreadyExistException());
 
   return next();
 };

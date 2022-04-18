@@ -1,5 +1,4 @@
-import { Request, Response, Router } from "express";
-import { nextTick } from "process";
+import { Router } from "express";
 import { LocalAuthGuard } from "../authorization/guards/local.guard";
 import { checkUser } from "../authorization/middlewares/checkUser";
 import { validateLoginDto } from "../authorization/middlewares/validateLoginDto";

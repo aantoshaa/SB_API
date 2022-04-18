@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import { ValidationException } from "../../error-handnling/exceptions";
 import { RegistrationRequest } from "../../shared/interfaces/registration-request";
 
 export const validateUserDto = (
@@ -7,7 +8,7 @@ export const validateUserDto = (
   next: NextFunction
 ) => {
   const { firstName, lastName, email, password } = req.body;
-  console.log(req.body);
+
   const errorMessages: string[] = [];
 
   if (!firstName) errorMessages.push("Firstname should be provided");
@@ -30,7 +31,7 @@ export const validateUserDto = (
     errorMessages.push("Password must have at least 1 capital letter");
 
   if (errorMessages.length !== 0)
-    return next(new Error(JSON.stringify(errorMessages)));
+    return next(new ValidationException(JSON.stringify(errorMessages)));
 
   return next();
 };

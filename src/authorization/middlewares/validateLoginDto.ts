@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ValidationException } from "../../error-handnling/exceptions";
 import { CreateUserDto } from "../../shared/interfaces/create-user.dto";
 
 export const validateLoginDto = (
@@ -14,7 +15,7 @@ export const validateLoginDto = (
   if (!password) errorMessages.push("Password should be provided");
 
   if (errorMessages.length !== 0)
-    return next(new Error(JSON.stringify(errorMessages)));
+    return next(new ValidationException(JSON.stringify(errorMessages)));
 
   return next();
 };

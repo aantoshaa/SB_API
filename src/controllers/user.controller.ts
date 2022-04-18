@@ -25,8 +25,6 @@ export class UserController {
     res: Response,
     next: NextFunction
   ) {
-    console.log("Insider Controller");
-
     try {
       const { id } = req.user;
 
