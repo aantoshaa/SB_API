@@ -9,6 +9,9 @@ export class Transaction {
   @Column()
   sum: number;
 
+  @Column({ default: new Date().toLocaleString() })
+  date: string;
+
   @ManyToOne((type) => User, (user) => user.lastName)
   from: User;
 

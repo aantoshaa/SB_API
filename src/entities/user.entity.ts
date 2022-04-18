@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Credentials } from "./credentials.entity";
+import { UserRole } from "./role.entity";
 import { Transaction } from "./transaction.entity";
 
 @Entity()
@@ -20,6 +21,9 @@ export class User {
   @Column()
   lastName: string;
 
+  @Column({ default: 300 })
+  sum: number;
+
   @OneToOne((type) => Credentials, (credentials) => credentials.user, {
     cascade: true,
   })
@@ -27,4 +31,7 @@ export class User {
 
   @OneToMany((type) => Transaction, (transaction) => transaction)
   transaction: Transaction[];
+
+  @ManyToMany((type) => UserRole, (role) => role.user, { cascade: true })
+  roles: UserRole[];
 }

@@ -1,17 +1,6 @@
 import { NextFunction, Response } from "express";
-import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
-
-export interface CreateUserDto {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
-export interface RegistrationRequest {
-  body: CreateUserDto;
-}
+import { RegistrationRequest } from "../shared/interfaces/registration-request";
 
 export class UserController {
   static async registrate(
