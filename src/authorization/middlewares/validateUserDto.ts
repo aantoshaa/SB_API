@@ -7,7 +7,7 @@ export const validateUserDto = (
   next: NextFunction
 ) => {
   const { firstName, lastName, email, password } = req.body;
-
+  console.log(req.body);
   const errorMessages: string[] = [];
 
   if (!firstName) errorMessages.push("Firstname should be provided");
