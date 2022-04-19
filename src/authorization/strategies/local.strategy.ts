@@ -15,9 +15,12 @@ export const localStrategy = new LocalStrategy(
         },
         relations: {
           credentials: true,
-          // roles: true,
+          roles: true,
         },
       });
+
+      const roles = user.roles.map((item) => item.role);
+      console.log(roles);
 
       if (user && user.credentials.password === password) {
         const { id } = user;
