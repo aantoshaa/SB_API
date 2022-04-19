@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { User } from "./user.entity";
 
 @Entity()
@@ -12,9 +18,9 @@ export class Transaction {
   @Column({ default: new Date().toLocaleString() })
   date: string;
 
-  @ManyToOne((type) => User, (user) => user.lastName)
+  @ManyToOne((type) => User)
   from: User;
 
-  @ManyToOne((type) => User, (user) => user.transaction)
+  @ManyToOne((type) => User)
   to: User;
 }

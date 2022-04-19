@@ -4,6 +4,7 @@ import { jwtStrategy } from "./src/authorization/strategies/jwt.strategy";
 import { localStrategy } from "./src/authorization/strategies/local.strategy";
 import { AppDataSource } from "./src/config/db/appDataSource";
 import { CommonException } from "./src/error-handnling/exceptions";
+import { transactionsRouter } from "./src/routes/transactions.routes";
 import { usersRouter } from "./src/routes/users.routes";
 
 const app: Application = express();
@@ -16,11 +17,12 @@ app.use(passport.initialize());
 
 //set routes
 app.use("/users", usersRouter);
+app.use("/transactions", transactionsRouter);
 
 //common error handlers
 app.use(
   (err: CommonException, req: Request, res: Response, next: NextFunction) => {
-    res.status(err.status).send({
+    res.status(err.status || 500).send({
       message: "Ooops... Something went wrong",
       reason: err.message,
     });

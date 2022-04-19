@@ -4,7 +4,7 @@ import { UserRepostirory } from "../../repositories/user.repository";
 
 export const jwtStrategy = new JwtStrategy(
   {
-    secretOrKey: "secret",
+    secretOrKey: process.env.TOKEN_KEY_WORD,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   },
   async (payload, done) => {

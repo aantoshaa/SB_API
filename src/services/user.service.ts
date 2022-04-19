@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { CredentialsRepository } from "../repositories/credentials.repository";
+import { TransactionRepository } from "../repositories/transaction.repository";
 import { UsersRoleRepository } from "../repositories/user-role.repository";
 import { UserRepostirory } from "../repositories/user.repository";
 import { CreateUserDto } from "../shared/interfaces/create-user.dto";
@@ -35,7 +36,10 @@ export class UserService {
 
   static loginUser(id: number): { token: string } {
     return {
-      token: jwt.sign({ sub: id }, "secret"),
+      token: jwt.sign({ sub: id }, process.env.TOKEN_KEY_WORD),
     };
   }
 }
+
+//cash withdrawal снятие денег
+//account replenishment пополнение счёта

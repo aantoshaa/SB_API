@@ -1,6 +1,8 @@
 import {
+  Check,
   Column,
   Entity,
+  JoinColumn,
   ManyToMany,
   OneToMany,
   OneToOne,
@@ -11,6 +13,7 @@ import { UserRole } from "./role.entity";
 import { Transaction } from "./transaction.entity";
 
 @Entity()
+@Check("sum > 0")
 export class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
@@ -29,8 +32,9 @@ export class User {
   })
   credentials: Credentials;
 
-  @OneToMany((type) => Transaction, (transaction) => transaction)
-  transaction: Transaction[];
+  // @ManyToMany((type) => Transaction, (transaction) => transaction)
+  // @JoinColumn()
+  // transaction: Transaction[];
 
   @ManyToMany((type) => UserRole, (role) => role.user, { cascade: true })
   roles: UserRole[];
