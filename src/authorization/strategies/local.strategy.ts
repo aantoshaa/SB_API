@@ -15,8 +15,11 @@ export const localStrategy = new LocalStrategy(
         },
         relations: {
           credentials: true,
+          // roles: true,
         },
       });
+
+      console.log(user);
 
       if (user && user.credentials.password === password) {
         const { id } = user;

@@ -2,9 +2,7 @@ import {
   Check,
   Column,
   Entity,
-  JoinColumn,
   ManyToMany,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -31,10 +29,6 @@ export class User {
     cascade: true,
   })
   credentials: Credentials;
-
-  // @ManyToMany((type) => Transaction, (transaction) => transaction)
-  // @JoinColumn()
-  // transaction: Transaction[];
 
   @ManyToMany((type) => UserRole, (role) => role.user, { cascade: true })
   roles: UserRole[];
