@@ -3,6 +3,23 @@ import { NoMoneyException } from "../error-handnling/transactions.exceptions";
 import { TransactionsSerivce } from "../services/transactions.service";
 
 export class TransactionsController {
+  static async sendMoney(
+    req: Request & { user: any },
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { toUserId, sum } = req.body;
+      const { id } = req.user;
+
+      await TransactionsSerivce.sendMoney(id, toUserId, sum);
+
+      res.send("Successfully");
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async accountReplenishment(
     req: Request & { user: any },
     res: Response,

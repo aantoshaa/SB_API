@@ -19,7 +19,7 @@ export class UserController {
       password,
     }).catch(next);
 
-    return { firstName, lastName };
+    res.send({ firstName, lastName });
   }
 
   static async login(

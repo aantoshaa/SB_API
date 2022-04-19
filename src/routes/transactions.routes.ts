@@ -16,3 +16,7 @@ transactionsRouter
 transactionsRouter
   .route("/minus")
   .post(sumValidation, JwtAuthGuard, TransactionsController.cashWithdrawal);
+
+transactionsRouter
+  .route("/send")
+  .post(JwtAuthGuard, TransactionsController.sendMoney);

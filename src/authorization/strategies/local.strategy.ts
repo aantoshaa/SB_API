@@ -19,8 +19,6 @@ export const localStrategy = new LocalStrategy(
         },
       });
 
-      console.log(user);
-
       if (user && user.credentials.password === password) {
         const { id } = user;
         return done(null, { id }); // req.user = { id: 123 }
