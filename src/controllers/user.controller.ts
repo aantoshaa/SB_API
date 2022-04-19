@@ -28,13 +28,21 @@ export class UserController {
     next: NextFunction
   ) {
     try {
-      const { id } = req.user;
+      const { id, roles } = req.user;
 
-      const tokenDto = UserService.loginUser(id);
+      const tokenDto = UserService.loginUser(id, roles);
 
       res.send(tokenDto);
     } catch (err) {
       next(err);
     }
+  }
+
+  static async adminsOnlyResouse(
+    req: Request & { user: any },
+    res: Response,
+    next: NextFunction
+  ) {
+    res.send("Success");
   }
 }

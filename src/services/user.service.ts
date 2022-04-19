@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { ForbiddenException } from "../error-handnling/exceptions";
 import { CredentialsRepository } from "../repositories/credentials.repository";
 import { TransactionRepository } from "../repositories/transaction.repository";
 import { UsersRoleRepository } from "../repositories/user-role.repository";
@@ -34,9 +35,9 @@ export class UserService {
     return { firstName, lastName };
   }
 
-  static loginUser(id: number): { token: string } {
+  static loginUser(id: number, roles: string[]): { token: string } {
     return {
-      token: jwt.sign({ sub: id }, process.env.TOKEN_KEY_WORD),
+      token: jwt.sign({ sub: id, roles }, process.env.TOKEN_KEY_WORD),
     };
   }
 }

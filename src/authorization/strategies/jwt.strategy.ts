@@ -9,12 +9,12 @@ export const jwtStrategy = new JwtStrategy(
   },
   async (payload, done) => {
     try {
-      const { sub } = payload;
+      const { sub, roles } = payload;
       const user = await UserRepostirory.findOne({ where: { id: sub } });
 
       if (!user) throw new UnauthorizaedException();
 
-      done(null, { id: sub }); // req.user = { id: 456 }
+      done(null, { id: sub, roles }); // req.user = { id: 456 }
     } catch (err) {
       done(err, false);
     }
