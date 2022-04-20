@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { User } from "../entities/user.entity";
 import { ForbiddenException } from "../error-handnling/exceptions";
 import { CredentialsRepository } from "../repositories/credentials.repository";
 import { TransactionRepository } from "../repositories/transaction.repository";
@@ -7,14 +8,12 @@ import { UserRepostirory } from "../repositories/user.repository";
 import { CreateUserDto } from "../shared/interfaces/create-user.dto";
 
 export class UserService {
-  static async isUserExistById(id: number): Promise<boolean> {
-    const user = await UserRepostirory.findOne({
+  static async getUserById(id: number): Promise<User> {
+    return UserRepostirory.findOne({
       where: {
         id,
       },
     });
-
-    return user !== null;
   }
 
   static async isUserExistsByEmail(email: string) {

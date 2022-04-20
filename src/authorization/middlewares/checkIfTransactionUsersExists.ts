@@ -1,20 +1,33 @@
 import { Request, Response, NextFunction } from "express";
+import { User } from "../../entities/user.entity";
 import { UserService } from "../../services/user.service";
 
+export interface TransactionDto {
+  userFrom: User;
+  userTo: User;
+  sum: number;
+}
+
 export const checkIfUsersExists = async (
-  req: Request & { user: any },
+  req: Request & { user: any; transactionDto: TransactionDto },
   res: Response,
   next: NextFunction
 ) => {
   const fromUserId = req.user.id;
   const { toUserId, sum } = req.body;
 
-  return (
-    await Promise.all([
-      UserService.isUserExistById(fromUserId),
-      UserService.isUserExistById(toUserId),
-    ])
-  ).some((user) => user === false)
-    ? next(new Error("No such users"))
-    : next();
+  const [userFrom, userTo] = await Promise.all([
+    UserService.getUserById(fromUserId),
+    UserService.getUserById(toUserId),
+  ]);
+
+  if (!userFrom || !userTo) return next(new Error("non existen users"));
+
+  req.transactionDto = {
+    userFrom,
+    userTo,
+    sum,
+  };
+
+  return next();
 };

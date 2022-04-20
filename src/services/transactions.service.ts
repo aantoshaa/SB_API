@@ -33,26 +33,19 @@ export class TransactionsSerivce {
   }
 
   //TODO add logging in file / console / database transactions table
-  static async sendMoney(fromUserId: number, toUserId: number, sum: number) {
+  static async sendMoney(fromUser: User, toUser: User, sum: number) {
     const queryRunner = AppDataSource.createQueryRunner();
+
+    console.log(fromUser);
+    console.log(toUser);
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      await queryRunner.manager
-        .createQueryBuilder()
-        .update(User)
-        .set({ sum: () => `sum - ${sum}` })
-        .where("id = :id", { id: fromUserId })
-        .execute();
-
-      await queryRunner.manager
-        .createQueryBuilder()
-        .update(User)
-        .set({ sum: () => `sum + ${sum}` })
-        .where("id = :id", { id: toUserId })
-        .execute();
-
+      fromUser.sum -= Number(sum);
+      toUser.sum += Number(sum);
+      await queryRunner.manager.save(fromUser);
+      await queryRunner.manager.save(toUser);
       await queryRunner.commitTransaction();
     } catch (err) {
       queryRunner.rollbackTransaction();

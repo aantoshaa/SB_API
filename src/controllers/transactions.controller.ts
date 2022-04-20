@@ -1,18 +1,17 @@
 import { NextFunction, Request, Response } from "express";
+import { TransactionDto } from "../authorization/middlewares/checkIfTransactionUsersExists";
 import { NoMoneyException } from "../error-handnling/transactions.exceptions";
 import { TransactionsSerivce } from "../services/transactions.service";
 
 export class TransactionsController {
   static async sendMoney(
-    req: Request & { user: any },
+    req: Request & { transactionDto: TransactionDto },
     res: Response,
     next: NextFunction
   ) {
     try {
-      const { toUserId, sum } = req.body;
-      const { id } = req.user;
-
-      await TransactionsSerivce.sendMoney(id, toUserId, sum);
+      const { userFrom, userTo, sum } = req.transactionDto;
+      await TransactionsSerivce.sendMoney(userFrom, userTo, sum);
 
       res.send("Successfully");
     } catch (err) {
