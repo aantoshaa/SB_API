@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../entities/user.entity";
-import { UserRepostirory } from "../repositories/user.repository";
 import { UserService } from "../services/user.service";
 import { RegistrationRequest } from "../shared/interfaces/registration-request";
 
@@ -43,6 +41,7 @@ export class UserController {
     res: Response,
     next: NextFunction
   ) {
-    res.send("Success");
+    const users = await UserService.getAllUsers();
+    res.send(users);
   }
 }

@@ -7,14 +7,14 @@ export abstract class CommonException extends Error {
 
 export class UnauthorizaedException extends CommonException {
   constructor() {
-    super("Such user doesn't exists");
+    super("Unauthorized user");
     this.status = 401;
   }
 }
 
 export class ForbiddenException extends CommonException {
   constructor() {
-    super("This resouse is forbidden for you");
+    super("This resource is forbidden for you");
     this.status = 403;
   }
 }

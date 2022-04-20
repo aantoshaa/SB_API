@@ -9,7 +9,7 @@ export const checkUser = async (
 ) => {
   const { email } = req.body;
 
-  if (await UserService.isUserExists(email))
+  if (await UserService.isUserExistsByEmail(email))
     return next(new UserAlreadyExistException());
 
   return next();

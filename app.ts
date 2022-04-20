@@ -26,6 +26,8 @@ app.use(
       message: "Ooops... Something went wrong",
       reason: err.message,
     });
+
+    res.send(err);
   }
 );
 

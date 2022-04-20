@@ -7,7 +7,17 @@ import { UserRepostirory } from "../repositories/user.repository";
 import { CreateUserDto } from "../shared/interfaces/create-user.dto";
 
 export class UserService {
-  static async isUserExists(email: string) {
+  static async isUserExistById(id: number): Promise<boolean> {
+    const user = await UserRepostirory.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return user !== null;
+  }
+
+  static async isUserExistsByEmail(email: string) {
     const user = await UserRepostirory.findOne({
       where: { credentials: { email } },
     });
@@ -39,6 +49,17 @@ export class UserService {
     return {
       token: jwt.sign({ sub: id, roles }, process.env.TOKEN_KEY_WORD),
     };
+  }
+
+  static async getAllUsers() {
+    const users = await UserRepostirory.find({
+      relations: {
+        roles: true,
+        credentials: true,
+      },
+    });
+
+    return users;
   }
 }
 

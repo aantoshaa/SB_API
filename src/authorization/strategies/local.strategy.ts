@@ -19,11 +19,12 @@ export const localStrategy = new LocalStrategy(
         },
       });
 
-      const roles = user.roles.map((item) => item.role);
-
       if (user && user.credentials.password === password) {
+        const roles = user.roles.map((item) => item.role);
+
         const { id } = user;
-        return done(null, { id, roles }); // req.user = { id: 123 }
+
+        return done(null, { id, roles });
       } else throw new UnauthorizaedException();
     } catch (err) {
       done(err, false);
