@@ -63,5 +63,4 @@ export class UserService {
   }
 }
 
-//cash withdrawal снятие денег
-//account replenishment пополнение счёта
+
