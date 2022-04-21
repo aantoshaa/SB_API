@@ -36,15 +36,14 @@ export class TransactionsSerivce {
   static async sendMoney(fromUser: User, toUser: User, sum: number) {
     const queryRunner = AppDataSource.createQueryRunner();
 
-    console.log(fromUser);
-    console.log(toUser);
-
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
       fromUser.sum -= Number(sum);
-      toUser.sum += Number(sum);
+
       await queryRunner.manager.save(fromUser);
+
+      toUser.sum += Number(sum);
       await queryRunner.manager.save(toUser);
       await queryRunner.commitTransaction();
     } catch (err) {

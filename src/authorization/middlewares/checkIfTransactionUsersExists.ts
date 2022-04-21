@@ -23,6 +23,9 @@ export const checkIfUsersExists = async (
 
   if (!userFrom || !userTo) return next(new Error("non existen users"));
 
+  if (userFrom.id === userTo.id)
+    return next(new Error("Can't send money to yourself"));
+
   req.transactionDto = {
     userFrom,
     userTo,
