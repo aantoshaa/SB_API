@@ -1,9 +1,8 @@
 import { AppDataSource } from "../config/db/appDataSource";
 import { User } from "../entities/user.entity";
 import { NoMoneyException } from "../error-handnling/transactions.exceptions";
-import { TransactionRepository } from "../repositories/transaction.repository";
 import { UserRepostirory } from "../repositories/user.repository";
-import { UserService } from "./user.service";
+import { Operation } from "../shared/enums/operation.enums";
 
 export class TransactionsSerivce {
   static async increaceSum(id: number, value: number) {
@@ -40,9 +39,7 @@ export class TransactionsSerivce {
     await queryRunner.startTransaction();
     try {
       fromUser.sum -= Number(sum);
-
       await queryRunner.manager.save(fromUser);
-
       toUser.sum += Number(sum);
       await queryRunner.manager.save(toUser);
       await queryRunner.commitTransaction();
