@@ -4,7 +4,19 @@ import { NoMoneyException } from "../error-handnling/transactions.exceptions";
 import { UserRepostirory } from "../repositories/user.repository";
 
 export class TransactionsSerivce {
+<<<<<<< HEAD
   static async increaceSum(id: number, value: number) {
+=======
+  private static async transactionsLogging() {
+    console.log("abc");
+  }
+
+  private static async commonSumChanging(
+    id: number,
+    sum: number,
+    operation: Operation
+  ) {
+>>>>>>> optimization/remove-duplicated-code
     const result = await UserRepostirory.createQueryBuilder()
       .update()
       .set({
