@@ -15,5 +15,3 @@ usersRouter
 usersRouter
   .route("/login")
   .post(validateLoginDto, LocalAuthGuard, UserController.login);
-
-usersRouter.route("/admin").get(RolesGuard, UserController.adminsOnlyResouse);
