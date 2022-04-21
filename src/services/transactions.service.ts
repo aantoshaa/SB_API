@@ -2,11 +2,9 @@ import { AppDataSource } from "../config/db/appDataSource";
 import { User } from "../entities/user.entity";
 import { NoMoneyException } from "../error-handnling/transactions.exceptions";
 import { UserRepostirory } from "../repositories/user.repository";
+import { Operation } from "../shared/enums/operation.enums";
 
 export class TransactionsSerivce {
-<<<<<<< HEAD
-  static async increaceSum(id: number, value: number) {
-=======
   private static async transactionsLogging() {
     console.log("abc");
   }
@@ -16,11 +14,10 @@ export class TransactionsSerivce {
     sum: number,
     operation: Operation
   ) {
->>>>>>> optimization/remove-duplicated-code
     const result = await UserRepostirory.createQueryBuilder()
       .update()
       .set({
-        sum: () => `sum + ${value}`,
+        sum: () => `sum + ${sum}`,
       })
       .where("id = :id", { id })
       .returning(["firstName", "sum"])
