@@ -1,14 +1,26 @@
 import jwt from "jsonwebtoken";
+import { DeleteResult } from "typeorm";
 import { User } from "../entities/user.entity";
-import { ForbiddenException } from "../error-handnling/exceptions";
 import { CredentialsRepository } from "../repositories/credentials.repository";
-import { TransactionRepository } from "../repositories/transaction.repository";
 import { UsersRoleRepository } from "../repositories/user-role.repository";
 import { UserRepostirory } from "../repositories/user.repository";
 import { CreateUserDto } from "../shared/interfaces/create-user.dto";
 
 export class UserService {
-  static async getUserById(id: number): Promise<User> {
+  static async deleteUser(id: number): Promise<DeleteResult> {
+    return UserRepostirory.delete({ id });
+  }
+
+  static async getAllUsers(): Promise<User[]> {
+    return UserRepostirory.find({
+      relations: {
+        credentials: true,
+        roles: true,
+      },
+    });
+  }
+
+  static async getUserById(id: number): Promise<User | null> {
     return UserRepostirory.findOne({
       where: {
         id,
@@ -48,17 +60,6 @@ export class UserService {
     return {
       token: jwt.sign({ sub: id, roles }, process.env.TOKEN_KEY_WORD),
     };
-  }
-
-  static async getAllUsers() {
-    const users = await UserRepostirory.find({
-      relations: {
-        roles: true,
-        credentials: true,
-      },
-    });
-
-    return users;
   }
 }
 

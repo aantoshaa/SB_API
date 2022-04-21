@@ -13,6 +13,7 @@ export const RolesGuard = (req: Request, res: Response, next: NextFunction) => {
   if (!token) next(new UnauthorizaedException());
 
   const payload: any = jwt.verify(token, process.env.TOKEN_KEY_WORD);
+  console.log(payload);
 
   const { roles }: { roles: Role[] } = payload;
 

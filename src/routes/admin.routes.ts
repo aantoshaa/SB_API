@@ -1,8 +1,15 @@
-import { Router } from "express";
+import { Request, Router } from "express";
+import { RolesGuard } from "../authorization/guards/roles.guard";
+import { AdminController } from "../controllers/admin.controller";
+import { UsersRoleRepository } from "../repositories/user-role.repository";
+import { UserRepostirory } from "../repositories/user.repository";
+import { Role } from "../shared/enums/admin.enum";
 
-const adminRouter = Router();
+export const adminRouter = Router();
 
-adminRouter.route("/users/:id").get();
-adminRouter.route("/users").get();
-adminRouter.route("/delete/:id").delete();
-adminRouter.route("/transactions").get();
+adminRouter.use(RolesGuard);
+
+adminRouter.route("/users/:id").get(AdminController.getUserById);
+adminRouter.route("/users").get(AdminController.getAllUsers);
+adminRouter.route("/delete/:id").delete(AdminController.deleteOne);
+adminRouter.route("/transactions").get(AdminController.getAllTransactions);

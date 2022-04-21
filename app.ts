@@ -4,6 +4,7 @@ import { jwtStrategy } from "./src/authorization/strategies/jwt.strategy";
 import { localStrategy } from "./src/authorization/strategies/local.strategy";
 import { AppDataSource } from "./src/config/db/appDataSource";
 import { CommonException } from "./src/error-handnling/exceptions";
+import { adminRouter } from "./src/routes/admin.routes";
 import { transactionsRouter } from "./src/routes/transactions.routes";
 import { usersRouter } from "./src/routes/users.routes";
 
@@ -18,6 +19,7 @@ app.use(passport.initialize());
 //set routes
 app.use("/users", usersRouter);
 app.use("/transactions", transactionsRouter);
+app.use("/admin", adminRouter);
 
 //common error handlers
 app.use(

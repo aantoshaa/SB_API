@@ -35,13 +35,4 @@ export class UserController {
       next(err);
     }
   }
-
-  static async adminsOnlyResouse(
-    req: Request & { user: any },
-    res: Response,
-    next: NextFunction
-  ) {
-    const users = await UserService.getAllUsers();
-    res.send(users);
-  }
 }

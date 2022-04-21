@@ -1,10 +1,9 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import { LocalAuthGuard } from "../authorization/guards/local.guard";
 import { checkUser } from "../authorization/middlewares/checkUser";
 import { validateLoginDto } from "../authorization/middlewares/validateLoginDto";
 import { validateUserDto } from "../authorization/middlewares/validateUserDto";
 import { UserController } from "../controllers/user.controller";
-import { RolesGuard } from "../authorization/guards/roles.guard";
 
 export const usersRouter = Router();
 
