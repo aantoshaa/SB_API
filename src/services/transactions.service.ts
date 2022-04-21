@@ -6,7 +6,9 @@ import { Operation } from "../shared/enums/operation.enums";
 
 //TODO TEST THIS
 export class TransactionsSerivce {
-  private static async transactionsLogging() {}
+  private static async transactionsLogging() {
+    console.log("abc");
+  }
 
   private static async commonSumChanging(
     id: number,
