@@ -1,4 +1,4 @@
-import { CommonException } from "./exceptions";
+import { CommonException } from "./authorization-exceptions";
 
 export class NoMoneyException extends CommonException {
   constructor() {

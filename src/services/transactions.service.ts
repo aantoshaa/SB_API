@@ -1,6 +1,6 @@
 import { AppDataSource } from "../config/db/appDataSource";
 import { User } from "../entities/user.entity";
-import { NoMoneyException } from "../error-handnling/transactions.exceptions";
+import { NoMoneyException } from "../error-handnling/transactions-exceptions";
 import { TransactionRepository } from "../repositories/transaction.repository";
 import { UserRepostirory } from "../repositories/user.repository";
 import { Operation } from "../shared/enums/operation.enum";

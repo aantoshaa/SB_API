@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { NotFoundError } from "../error-handnling/exceptions";
+import { NotFoundError } from "../error-handnling/authorization-exceptions";
 import { AdminService } from "../services/admin.service";
 
 import { UserService } from "../services/user.service";

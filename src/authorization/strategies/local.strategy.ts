@@ -1,5 +1,5 @@
 import { Strategy as LocalStrategy } from "passport-local";
-import { UnauthorizaedException } from "../../error-handnling/exceptions";
+import { UnauthorizaedException } from "../../error-handnling/authorization-exceptions";
 import { UserRepostirory } from "../../repositories/user.repository";
 import { localStrategyOptions } from "./options/local.options";
 

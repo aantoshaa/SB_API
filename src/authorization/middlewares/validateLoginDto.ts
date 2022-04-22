@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ValidationException } from "../../error-handnling/exceptions";
+import { ValidationException } from "../../error-handnling/authorization-exceptions";
 import { CreateUserDto } from "../../shared/interfaces/create-user.dto";
 
 export const validateLoginDto = (

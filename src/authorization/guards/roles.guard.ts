@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import {
   ForbiddenException,
   UnauthorizaedException,
-} from "../../error-handnling/exceptions";
+} from "../../error-handnling/authorization-exceptions";
 import { Role } from "../../shared/enums/admin.enum";
 import { getTokenFromHeader } from "../../shared/helpers/fetch-token.helper";
 

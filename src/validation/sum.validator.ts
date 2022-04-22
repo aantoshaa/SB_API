@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import {
   IncorrectSumInputException,
   UndefinedSumException,
-} from "../error-handnling/transactions.exceptions";
+} from "../error-handnling/transactions-exceptions";
 
 export const sumValidation = (
   req: Request,

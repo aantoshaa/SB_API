@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { TransactionDto } from "../authorization/middlewares/checkIfTransactionUsersExists";
-import { NoMoneyException } from "../error-handnling/transactions.exceptions";
+import { NoMoneyException } from "../error-handnling/transactions-exceptions";
 import { TransactionsSerivce } from "../services/transactions.service";
 
 export class TransactionsController {

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { UserAlreadyExistException } from "../../error-handnling/exceptions";
+import { UserAlreadyExistException } from "../../error-handnling/authorization-exceptions";
 import { UserService } from "../../services/user.service";
 
 export const checkUser = async (

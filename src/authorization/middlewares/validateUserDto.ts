@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import { ValidationException } from "../../error-handnling/exceptions";
+import { ValidationException } from "../../error-handnling/authorization-exceptions";
 import { RegistrationRequest } from "../../shared/interfaces/registration-request";
 
 export const validateUserDto = (
