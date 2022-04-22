@@ -1,9 +1,6 @@
-import { Request, Router } from "express";
+import { Router } from "express";
 import { RolesGuard } from "../authorization/guards/roles.guard";
 import { AdminController } from "../controllers/admin.controller";
-import { UsersRoleRepository } from "../repositories/user-role.repository";
-import { UserRepostirory } from "../repositories/user.repository";
-import { Role } from "../shared/enums/admin.enum";
 
 export const adminRouter = Router();
 

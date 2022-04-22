@@ -28,7 +28,7 @@ export class UserService {
     });
   }
 
-  static async isUserExistsByEmail(email: string) {
+  static async isUserExistsByEmail(email: string): Promise<boolean> {
     const user = await UserRepostirory.findOne({
       where: { credentials: { email } },
     });
@@ -38,21 +38,18 @@ export class UserService {
     return false;
   }
 
-  static async createUser(createUserDto: CreateUserDto) {
+  static async createUser(
+    createUserDto: CreateUserDto
+  ): Promise<Pick<User, "firstName" | "lastName">> {
     const { firstName, lastName, email, password } = createUserDto;
+    const user = UserRepostirory.create({ firstName, lastName });
+    const credentials = CredentialsRepository.create({ email, password });
+    const role = UsersRoleRepository.create();
 
-    const user = UserRepostirory.create({ firstName, lastName }); // set user entity
+    user.credentials = credentials;
+    user.roles = [role];
 
-    const credentials = CredentialsRepository.create({ email, password }); // set credentials entity
-
-    const role = UsersRoleRepository.create(); // set role entity with default value ( UserRole.USER )
-
-    user.credentials = credentials; // attach credentials to user
-
-    user.roles = [role]; // attach role to user
-
-    await UserRepostirory.save(user); // save user into repo
-
+    await UserRepostirory.save(user);
     return { firstName, lastName };
   }
 
@@ -62,5 +59,3 @@ export class UserService {
     };
   }
 }
-
-
