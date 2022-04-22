@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../../entities/user.entity";
+import { NotFoundError } from "../../error-handnling/authorization-exceptions";
+import { CircularTransactionException } from "../../error-handnling/transactions-exceptions";
 import { UserService } from "../../services/user.service";
 
 export interface TransactionDto {
@@ -21,10 +23,10 @@ export const checkIfUsersExists = async (
     UserService.getUserById(toUserId),
   ]);
 
-  if (!userFrom || !userTo) return next(new Error("non existen users"));
+  if (!userFrom || !userTo) return next(new NotFoundError());
 
   if (userFrom.id === userTo.id)
-    return next(new Error("Can't send money to yourself"));
+    return next(new CircularTransactionException());
 
   req.transactionDto = {
     userFrom,

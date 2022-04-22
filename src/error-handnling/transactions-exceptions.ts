@@ -20,3 +20,10 @@ export class UndefinedSumException extends CommonException {
     this.status = 402;
   }
 }
+
+export class CircularTransactionException extends CommonException {
+  constructor() {
+    super("Cant't send money to yourself");
+    this.status = 400;
+  }
+}
