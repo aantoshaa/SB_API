@@ -27,6 +27,7 @@ export class User {
 
   @OneToOne((type) => Credentials, (credentials) => credentials.user, {
     cascade: true,
+    nullable: true,
   })
   credentials: Credentials;
 

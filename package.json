@@ -12,7 +12,11 @@
 
     "jsonwebtoken": "^8.5.1",
 
+    "mongoose": "^6.3.1",
+
     "passport": "^0.5.2",
+
+    "passport-google-oauth2": "^0.2.0",
 
     "passport-jwt": "^4.0.0",
 
@@ -31,6 +35,8 @@
     "@types/express": "^4.17.13",
 
     "@types/node": "^17.0.24",
+
+    "@types/passport-google-oauth2": "^0.1.5",
 
     "@types/passport-jwt": "^3.0.6",
 
