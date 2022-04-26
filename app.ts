@@ -37,7 +37,7 @@ const bootstrap = async () => {
       AppDataSource.initialize().then(() =>
         logger.info("Connected to PostgreSQL successfully")
       ),
-      connect("mongodb://localhost:27017/oauth-users-storage").then(() =>
+      connect(process.env.MONGO_CONNECTION_STRING).then(() =>
         logger.info("Connected to MongoDB successfully")
       ),
     ]);

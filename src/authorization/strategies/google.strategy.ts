@@ -7,9 +7,8 @@ import { UserModel } from "../../mongoose/models/user.model";
 
 export const googleStrategy = new GoogleStrategy(
   {
-    clientID:
-      "871657939645-f7hcd8f9hfndgteim9sn4hve4pqso9jf.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback",
   },
   async (
